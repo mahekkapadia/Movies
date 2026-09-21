@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { searchMovies } from '../Redux/actions';
-
 
 function MovieSearch() {
 
@@ -25,33 +22,21 @@ function MovieSearch() {
 
     // Search movies
     const handleSearch = (e) => {
-
         const value = e.target.value;
-
         setSearchText(value);
-
         if (value.trim() !== '') {
-
             dispatch(searchMovies(value));
-
         }
-
     };
-
-
+    
     return (
-
         <div className="container mt-4">
-
             <h2 className="text-center mb-4">
                 Search Movies
             </h2>
-
-
+            
             {/* Search Box */}
-
             <div className="input-group mb-4">
-
                 <input
                     type="text"
                     className="form-control"
@@ -59,7 +44,6 @@ function MovieSearch() {
                     value={searchText}
                     onChange={handleSearch}
                 />
-
                 <button
                     className="btn btn-primary"
                     onClick={() => {
@@ -70,34 +54,23 @@ function MovieSearch() {
                 >
                     Search
                 </button>
-
             </div>
 
-
             {/* Loading */}
-
             {loading && (
-
                 <p className="text-center">
                     Searching movies...
                 </p>
-
             )}
 
-
             {/* Movie Results */}
-
             <div className="row">
-
                 {movies.map((movie) => (
-
                     <div
                         className="col-md-3 mb-4"
                         key={movie.id}
                     >
-
                         <div className="card h-100 shadow">
-
                             <img
                                 src={
                                     movie.poster_path
@@ -108,41 +81,25 @@ function MovieSearch() {
                                 alt={movie.title}
                             />
 
-
                             <div className="card-body">
-
                                 <h5 className="card-title">
                                     {movie.title}
                                 </h5>
 
-
                                 <p className="card-text">
-
-                                    ⭐ {movie.vote_average}
-
+                                    {movie.vote_average}
                                 </p>
-
 
                                 <p className="text-muted">
-
                                     {movie.release_date}
-
                                 </p>
-
-
                             </div>
-
                         </div>
-
                     </div>
-
                 ))}
-
             </div>
-
-
+            
             {/* No Results */}
-
             {!loading &&
                 searchText !== '' &&
                 movies.length === 0 && (
@@ -150,14 +107,8 @@ function MovieSearch() {
                     <p className="text-center">
                         No movies found.
                     </p>
-
                 )}
-
         </div>
-
     );
-
 }
-
-
 export default MovieSearch;
