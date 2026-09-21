@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useParams } from 'react-router-dom';
-
 import { fetchMovieDetails } from '../Redux/actions';
 
-
 function MovieDetails() {
-
     // Get movie id from URL
     const { id } = useParams();
 
@@ -27,46 +22,32 @@ function MovieDetails() {
 
     // Fetch movie details
     useEffect(() => {
-
         dispatch(fetchMovieDetails(id));
-
     }, [dispatch, id]);
-
 
     // Show loading message
     if (loading) {
-
         return (
             <h3 className="text-center mt-5">
                 Loading movie details...
             </h3>
         );
-
     }
-
 
     // If movie is not available
     if (!movie) {
-
         return (
             <h3 className="text-center mt-5">
                 Movie not found
             </h3>
         );
-
     }
-
-
     return (
-
         <div className="container mt-5">
-
             <div className="row">
-
+                
                 {/* Movie Poster */}
-
                 <div className="col-md-4">
-
                     <img
                         src={
                             movie.poster_path
@@ -76,40 +57,30 @@ function MovieDetails() {
                         alt={movie.title}
                         className="img-fluid rounded"
                     />
-
                 </div>
 
-
                 {/* Movie Information */}
-
                 <div className="col-md-8">
-
                     <h1>
                         {movie.title}
                     </h1>
-
-
                     <p>
                         <strong>Release Date:</strong>{' '}
                         {movie.release_date}
                     </p>
-
-
+                    
                     <p>
                         <strong>Rating:</strong>{' '}
-                        ⭐ {movie.vote_average}
+                        {movie.vote_average}
                     </p>
-
 
                     <p>
                         <strong>Language:</strong>{' '}
                         {movie.original_language}
                     </p>
-
-
+                    
                     <p>
                         <strong>Genre:</strong>{' '}
-
                         {movie.genres &&
                             movie.genres.map((genre) => (
                                 <span
@@ -120,9 +91,7 @@ function MovieDetails() {
                                 </span>
                             ))
                         }
-
                     </p>
-
 
                     <h5 className="mt-4">
                         Description
@@ -132,13 +101,11 @@ function MovieDetails() {
                         {movie.overview}
                     </p>
 
-
                     <h5 className="mt-4">
                         Cast
                     </h5>
 
                     <p>
-
                         {movie.credits &&
                             movie.credits.cast
                                 .slice(0, 5)
@@ -151,17 +118,11 @@ function MovieDetails() {
                                     </span>
                                 ))
                         }
-
                     </p>
 
                 </div>
-
             </div>
-
         </div>
-
     );
 }
-
-
 export default MovieDetails;
