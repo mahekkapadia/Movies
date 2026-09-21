@@ -49,7 +49,7 @@ function Form() {
             movie.description === '' ||
             movie.rating === '' ||
             movie.releaseDate === ''
-        ) {
+        ){
             alert('Please fill all the fields');
             return;
         }
@@ -79,7 +79,6 @@ function Form() {
                 ...movie,
                 id: Date.now()
             };
-
             setMovies([...movies, newMovie]);
         }
 
@@ -99,10 +98,8 @@ function Form() {
     const handleEdit = (id) => {
 
         const selectedMovie = movies.find((item) => item.id === id);
-
         setMovie(selectedMovie);
         setEditId(id);
-
         // Scroll to top
         window.scrollTo({
             top: 0,
@@ -121,14 +118,12 @@ function Form() {
             const remainingMovies = movies.filter(
                 (item) => item.id !== id
             );
-
             setMovies(remainingMovies);
         }
     };
 
     // Clear form
     const handleClear = () => {
-
         setMovie({
             title: '',
             poster: '',
@@ -138,10 +133,8 @@ function Form() {
             rating: '',
             releaseDate: ''
         });
-
         setEditId(null);
     };
-
     return(
         <div className="movie-pg">
 
@@ -163,10 +156,7 @@ function Form() {
                         <div className="row">
 
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">
-                                    Movie Title
-                                </label>
-
+                                <label className="form-label">Movie Title</label>
                                 <input
                                     type="text"
                                     name="title"
@@ -179,10 +169,7 @@ function Form() {
 
                             {/* Poster */}
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">
-                                    Poster URL
-                                </label>
-
+                                <label className="form-label">Poster URL</label>
                                 <input
                                     type="text"
                                     name="poster"
@@ -195,10 +182,7 @@ function Form() {
 
                             {/* Lang */}
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">
-                                    Language
-                                </label>
-
+                                <label className="form-label">Language</label>
                                 <select
                                     name="language"
                                     value={movie.language}
@@ -223,10 +207,7 @@ function Form() {
 
                             {/* Genere */}
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">
-                                    Genre
-                                </label>
-
+                                <label className="form-label">Genre</label>
                                 <select
                                     name="genre"
                                     value={movie.genre}
@@ -251,10 +232,7 @@ function Form() {
 
                             {/* Rating */}
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">
-                                    Rating
-                                </label>
-
+                                <label className="form-label">Rating</label>
                                 <input
                                     type="number"
                                     name="rating"
@@ -270,10 +248,7 @@ function Form() {
 
                             {/* release */}
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">
-                                    Release Date
-                                </label>
-
+                                <label className="form-label">Release Date</label>
                                 <input
                                     type="date"
                                     name="releaseDate"
@@ -285,11 +260,7 @@ function Form() {
 
                             {/* Description */}
                             <div className="col-12 mb-3">
-
-                                <label className="form-label">
-                                    Description
-                                </label>
-
+                                <label className="form-label">Description</label>
                                 <textarea
                                     name="description"
                                     value={movie.description}
@@ -299,26 +270,18 @@ function Form() {
                                     placeholder="Enter movie description"
                                 ></textarea>
                             </div>
-
                         </div>
 
                         {/* Buttons */}
                         <div className="button-section">
 
-                            <button
-                                type="submit"
-                                className="btn btn-primary"
-                            >
+                            <button type="submit" className="btn btn-primary">
                                 {editId !== null
                                     ? 'Update Movie'
                                     : 'Add Movie'}
                             </button>
                             
-                            <button
-                                type="button"
-                                className="btn btn-secondary"
-                                onClick={handleClear}
-                            >
+                            <button type="button" className="btn btn-secondary" onClick={handleClear}>
                                 Clear
                             </button>
 
@@ -328,14 +291,12 @@ function Form() {
 
                 {/* Movie List */}
                 <div className="movie-list-card">
-
                     <div className="list-heading">
                         <h2>Movie Collection</h2>
                         <span className="movie-count">{movies.length} Movies </span>
                     </div>
 
                     {movies.length === 0 ? (
-
                         <div className="empty-message">
                             <h4>No movies added yet 🎬</h4>
                             <p>
@@ -344,9 +305,7 @@ function Form() {
                         </div>
 
                     ) : (<div className="table-responsive">
-
                             <table className="table movie-table">
-
                                 <thead>
                                     <tr>
                                         <th>Poster</th>
@@ -358,11 +317,8 @@ function Form() {
                                         <th>Actions</th>
                                     </tr>
                                 </thead><tbody>
-
                                     {movies.map((item) => (
-
                                         <tr key={item.id}>
-
                                             <td>
                                                 <img
                                                     src={item.poster}
