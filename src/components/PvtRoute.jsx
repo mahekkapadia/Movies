@@ -1,9 +1,6 @@
 import React from 'react';
-
 import { useSelector } from 'react-redux';
-
 import { Navigate } from 'react-router-dom';
-
 
 function PvtRoute({ children }) {
 
@@ -12,21 +9,14 @@ function PvtRoute({ children }) {
         (state) => state.user
     );
 
-
     // If user is not logged in
     if (!user) {
-
         return (
             <Navigate to="/profile" />
         );
-
     }
-
 
     // If user is logged in
     return children;
-
 }
-
-
 export default PvtRoute;
