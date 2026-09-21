@@ -80,4 +80,4 @@ function MovieList() {
         </div>
     );
 }
-export defa MovieList;
+export default MovieList;
