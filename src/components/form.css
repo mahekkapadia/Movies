@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Main page */
+
+.movie-page {
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+
+/* Header */
+
+.movie-header {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+    margin-bottom: 35px;
+}
+
+.movie-header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.movie-header p {
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #d8dee9;
+}
+
+
+/* Form Card */
+
+.form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 35px;
+}
+
+.form-card h2 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #1f2937;
+}
+
+.form-subtitle {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+
+/* Labels */
+
+.form-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+
+/* Inputs */
+
+.form-control,
+.form-select {
+    border: 1px solid #d7dce2;
+    border-radius: 8px;
+    padding: 11px 13px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #536dfe;
+    box-shadow: 0 0 0 0.15rem rgba(83, 109, 254, 0.15);
+}
+
+
+/* Buttons */
+
+.button-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.button-section .btn {
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+
+/* Movie list */
+
+.movie-list-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Heading */
+
+.list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.list-heading h2 {
+    margin: 0;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.movie-count {
+    background: #e8edff;
+    color: #4055c7;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+
+/* Table */
+
+.movie-table {
+    vertical-align: middle;
+}
+
+.movie-table thead {
+    background-color: #1f2937;
+    color: white;
+}
+
+.movie-table th {
+    padding: 14px;
+    white-space: nowrap;
+}
+
+.movie-table td {
+    padding: 12px;
+}
+
+
+/* Poster */
+
+.movie-poster {
+    width: 55px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 7px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Empty message */
+
+.empty-message {
+    text-align: center;
+    padding: 45px 20px;
+    color: #777;
+}
+
+.empty-message h4 {
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .movie-header h1 {
+        font-size: 28px;
+    }
+
+    .form-card,
+    .movie-list-card {
+        padding: 20px;
+    }
+
+    .list-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+}
