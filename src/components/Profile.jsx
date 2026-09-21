@@ -1,52 +1,94 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 
 function Profile() {
 
-    // Store name entered by user
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    // Store favorite movie
-    const [favoriteMovie, setFavoriteMovie] = useState('');
-
-    // Get Redux dispatch
     const dispatch = useDispatch();
 
-    // Get logged-in user from Redux
     const user = useSelector(
         (state) => state.user
     );
 
 
-    // Login
-    const handleLogin = () => {
+    // Get saved user when page opens
+    useEffect(() => {
+
+        const savedUser = localStorage.getItem('movieUser');
+
+        if (savedUser) {
+
+            const userData = JSON.parse(savedUser);
+
+            dispatch({
+                type: 'LOGIN',
+                payload: userData
+            });
+
+        }
+
+    }, [dispatch]);
+
+
+    // Sign In
+    const handleLogin = (e) => {
+
+        e.preventDefault();
+
 
         if (name.trim() === '') {
-
             alert('Please enter your name');
-
             return;
         }
 
 
+        if (email.trim() === '') {
+            alert('Please enter your email');
+            return;
+        }
+
+
+        if (password.trim() === '') {
+            alert('Please enter your password');
+            return;
+        }
+
+
+        const userData = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+
+        // Save details in localStorage
+        localStorage.setItem(
+            'movieUser',
+            JSON.stringify(userData)
+        );
+
+
+        // Save user in Redux
         dispatch({
-
             type: 'LOGIN',
-
-            payload: {
-                name: name,
-                favoriteMovie: favoriteMovie
-            }
-
+            payload: userData
         });
+
+
+        alert('Sign in successful!');
 
     };
 
 
-    // Logout
+    // Sign Out
     const handleLogout = () => {
+
+        localStorage.removeItem('movieUser');
 
         dispatch({
             type: 'LOGOUT'
@@ -55,29 +97,31 @@ function Profile() {
     };
 
 
-    return (
+    // If user is not logged in
+    if (!user) {
 
-        <div className="container mt-5">
+        return (
 
-            <div className="card shadow p-4 mx-auto"
-                 style={{ maxWidth: '500px' }}>
+            <div className="container mt-5">
+
+                <div
+                    className="card shadow p-4 mx-auto"
+                    style={{ maxWidth: '500px' }}
+                >
+
+                    <h2 className="text-center mb-4">
+                        🎬 Sign In
+                    </h2>
 
 
-                {!user ? (
+                    <form onSubmit={handleLogin}>
 
-                    /* LOGIN */
-
-                    <>
-
-                        <h2 className="text-center mb-4">
-                            👤 User Profile
-                        </h2>
-
+                        {/* Name */}
 
                         <div className="mb-3">
 
                             <label className="form-label">
-                                Your Name
+                                Name
                             </label>
 
                             <input
@@ -93,19 +137,42 @@ function Profile() {
                         </div>
 
 
+                        {/* Email */}
+
                         <div className="mb-3">
 
                             <label className="form-label">
-                                Favourite Movie
+                                Email
                             </label>
 
                             <input
-                                type="text"
+                                type="email"
                                 className="form-control"
-                                placeholder="Enter favourite movie"
-                                value={favoriteMovie}
+                                placeholder="Enter your email"
+                                value={email}
                                 onChange={(e) =>
-                                    setFavoriteMovie(e.target.value)
+                                    setEmail(e.target.value)
+                                }
+                            />
+
+                        </div>
+
+
+                        {/* Password */}
+
+                        <div className="mb-3">
+
+                            <label className="form-label">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) =>
+                                    setPassword(e.target.value)
                                 }
                             />
 
@@ -113,60 +180,66 @@ function Profile() {
 
 
                         <button
+                            type="submit"
                             className="btn btn-primary w-100"
-                            onClick={handleLogin}
                         >
                             Sign In
                         </button>
 
-                    </>
+                    </form>
 
-                ) : (
+                </div>
 
-                    /* LOGGED IN */
+            </div>
 
-                    <>
+        );
 
-                        <h2 className="text-center mb-4">
-                            👋 Welcome, {user.name}
-                        </h2>
+    }
 
 
-                        <div className="alert alert-light">
+    // If user is logged in
+    return (
 
-                            <p>
-                                <strong>Name:</strong>{' '}
-                                {user.name}
-                            </p>
+        <div className="container mt-5">
 
+            <div
+                className="card shadow p-4 mx-auto"
+                style={{ maxWidth: '500px' }}
+            >
 
-                            <p>
-                                <strong>Favourite Movie:</strong>{' '}
-
-                                {user.favoriteMovie
-                                    ? user.favoriteMovie
-                                    : 'Not added'}
-                            </p>
-
-                        </div>
+                <h2 className="text-center mb-4">
+                    👋 Welcome, {user.name}
+                </h2>
 
 
-                        <button
-                            className="btn btn-danger w-100"
-                            onClick={handleLogout}
-                        >
-                            Sign Out
-                        </button>
+                <div className="alert alert-light">
 
-                    </>
+                    <p>
+                        <strong>Name:</strong>{' '}
+                        {user.name}
+                    </p>
 
-                )}
+                    <p>
+                        <strong>Email:</strong>{' '}
+                        {user.email}
+                    </p>
+
+                </div>
+
+
+                <button
+                    className="btn btn-danger w-100"
+                    onClick={handleLogout}
+                >
+                    Sign Out
+                </button>
 
             </div>
 
         </div>
 
     );
+
 }
 
 
