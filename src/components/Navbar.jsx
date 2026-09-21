@@ -8,24 +8,22 @@ import { useDispatch, useSelector } from 'react-redux';
 function Navbar() {
 
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
-    // Get logged-in user from Redux
     const user = useSelector(
         (state) => state.user
     );
 
 
-    // Sign out
     const handleLogout = () => {
+
+        localStorage.removeItem('movieUser');
 
         dispatch({
             type: 'LOGOUT'
         });
 
-        navigate('/login');
-
+        navigate('/');
     };
 
 
@@ -35,7 +33,7 @@ function Navbar() {
 
             <div className="container">
 
-                {/* App Name */}
+                {/* Logo */}
 
                 <Link
                     className="navbar-brand fw-bold"
@@ -45,7 +43,7 @@ function Navbar() {
                 </Link>
 
 
-                {/* Mobile Menu Button */}
+                {/* Mobile button */}
 
                 <button
                     className="navbar-toggler"
@@ -53,22 +51,18 @@ function Navbar() {
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarMenu"
                 >
-
                     <span className="navbar-toggler-icon"></span>
-
                 </button>
 
-
-                {/* Navigation Links */}
 
                 <div
                     className="collapse navbar-collapse"
                     id="navbarMenu"
                 >
 
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    {/* Menu */}
 
-                        {/* Popular Movies */}
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
                         <li className="nav-item">
 
@@ -82,8 +76,6 @@ function Navbar() {
                         </li>
 
 
-                        {/* Search */}
-
                         <li className="nav-item">
 
                             <Link
@@ -96,8 +88,6 @@ function Navbar() {
                         </li>
 
 
-                        {/* CRUD */}
-
                         <li className="nav-item">
 
                             <Link
@@ -109,24 +99,10 @@ function Navbar() {
 
                         </li>
 
-
-                        {/* Profile */}
-
-                        <li className="nav-item">
-
-                            <Link
-                                className="nav-link"
-                                to="/profile"
-                            >
-                                Profile
-                            </Link>
-
-                        </li>
-
                     </ul>
 
 
-                    {/* Right Side */}
+                    {/* Sign In / Sign Out */}
 
                     <div className="d-flex">
 
@@ -142,24 +118,18 @@ function Navbar() {
                         ) : (
 
                             <Link
-                                to="/login"
+                                to="/profile"
                                 className="btn btn-primary"
                             >
                                 Sign In
                             </Link>
 
                         )}
-
                     </div>
-
                 </div>
-
             </div>
-
         </nav>
-
     );
-
 }
 
 
