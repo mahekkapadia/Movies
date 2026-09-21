@@ -1,63 +1,46 @@
 import React, { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-
 function Profile() {
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const dispatch = useDispatch();
-
     const user = useSelector(
         (state) => state.user
     );
 
-
     // Get saved user when page opens
     useEffect(() => {
-
         const savedUser = localStorage.getItem('movieUser');
-
         if (savedUser) {
-
             const userData = JSON.parse(savedUser);
-
+            
             dispatch({
                 type: 'LOGIN',
                 payload: userData
             });
-
         }
-
     }, [dispatch]);
-
 
     // Sign In
     const handleLogin = (e) => {
-
         e.preventDefault();
-
-
+        
         if (name.trim() === '') {
             alert('Please enter your name');
             return;
         }
-
 
         if (email.trim() === '') {
             alert('Please enter your email');
             return;
         }
 
-
         if (password.trim() === '') {
             alert('Please enter your password');
             return;
         }
-
 
         const userData = {
             name: name,
@@ -65,13 +48,11 @@ function Profile() {
             password: password
         };
 
-
         // Save details in localStorage
         localStorage.setItem(
             'movieUser',
             JSON.stringify(userData)
         );
-
 
         // Save user in Redux
         dispatch({
@@ -79,51 +60,37 @@ function Profile() {
             payload: userData
         });
 
-
         alert('Sign in successful!');
-
     };
-
 
     // Sign Out
     const handleLogout = () => {
-
         localStorage.removeItem('movieUser');
-
         dispatch({
             type: 'LOGOUT'
         });
-
     };
-
 
     // If user is not logged in
     if (!user) {
-
         return (
-
             <div className="container mt-5">
-
                 <div
                     className="card shadow p-4 mx-auto"
                     style={{ maxWidth: '500px' }}
                 >
-
                     <h2 className="text-center mb-4">
-                        🎬 Sign In
+                        Sign In
                     </h2>
-
 
                     <form onSubmit={handleLogin}>
 
                         {/* Name */}
-
                         <div className="mb-3">
-
                             <label className="form-label">
                                 Name
                             </label>
-
+                            
                             <input
                                 type="text"
                                 className="form-control"
@@ -133,14 +100,10 @@ function Profile() {
                                     setName(e.target.value)
                                 }
                             />
-
                         </div>
-
-
+                        
                         {/* Email */}
-
                         <div className="mb-3">
-
                             <label className="form-label">
                                 Email
                             </label>
@@ -154,18 +117,14 @@ function Profile() {
                                     setEmail(e.target.value)
                                 }
                             />
-
                         </div>
 
-
                         {/* Password */}
-
                         <div className="mb-3">
-
                             <label className="form-label">
                                 Password
                             </label>
-
+                            
                             <input
                                 type="password"
                                 className="form-control"
@@ -175,9 +134,7 @@ function Profile() {
                                     setPassword(e.target.value)
                                 }
                             />
-
                         </div>
-
 
                         <button
                             type="submit"
@@ -185,35 +142,25 @@ function Profile() {
                         >
                             Sign In
                         </button>
-
                     </form>
-
                 </div>
-
             </div>
-
         );
-
     }
-
-
+    
     // If user is logged in
     return (
-
         <div className="container mt-5">
-
             <div
                 className="card shadow p-4 mx-auto"
                 style={{ maxWidth: '500px' }}
             >
 
                 <h2 className="text-center mb-4">
-                    👋 Welcome, {user.name}
+                    Welcome, {user.name}
                 </h2>
 
-
                 <div className="alert alert-light">
-
                     <p>
                         <strong>Name:</strong>{' '}
                         {user.name}
@@ -223,24 +170,16 @@ function Profile() {
                         <strong>Email:</strong>{' '}
                         {user.email}
                     </p>
-
                 </div>
-
-
+                
                 <button
                     className="btn btn-danger w-100"
                     onClick={handleLogout}
                 >
                     Sign Out
                 </button>
-
             </div>
-
         </div>
-
     );
-
 }
-
-
 export default Profile;
